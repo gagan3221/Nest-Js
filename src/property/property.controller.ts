@@ -6,12 +6,14 @@ import {
   Param,
   ParseBoolPipe,
   ParseIntPipe,
+  Patch,
   Post,
   Query,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { createPropertyDto } from './dto/createProperty.dto';
+import { CreateIdDto } from './dto/createId.dto';
 
 @Controller('property')
 export class PropertyController {
@@ -41,10 +43,33 @@ export class PropertyController {
     return `Number is ${no} and sort is ${sort}`;
   }
   @Post('body')
-  @UsePipes(new ValidationPipe())
-  createBody(@Body() body: createPropertyDto) {
+  //@UsePipes(new ValidationPipe({forbidNonWhitelisted : true}))
+  createBody(
+    @Body(
+      new ValidationPipe({
+        forbidNonWhitelisted: true,
+        groups: ['create'],
+        whitelist: true,
+      }),
+    )
+    body: createPropertyDto,
+  ) {
     console.log(body);
 
+    return body;
+  }
+  @Patch(':id')
+  update(
+    @Param() param : CreateIdDto , 
+    @Body(
+      new ValidationPipe({
+        forbidNonWhitelisted: true,
+        groups: ['update'],
+        whitelist: true,
+      }),
+    )
+    body: createPropertyDto
+  ) {
     return body;
   }
 }
