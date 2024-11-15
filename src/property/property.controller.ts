@@ -46,11 +46,11 @@ export class PropertyController {
   //@UsePipes(new ValidationPipe({forbidNonWhitelisted : true}))
   createBody(
     @Body(
-      new ValidationPipe({
-        forbidNonWhitelisted: true,
-        groups: ['create'],
-        whitelist: true,
-      }),
+      // new ValidationPipe({
+      //   forbidNonWhitelisted: true,
+      //   groups: ['create'],
+      //   whitelist: true,
+      // }),
     )
     body: createPropertyDto,
   ) {
@@ -62,14 +62,18 @@ export class PropertyController {
   update(
     @Param() param : CreateIdDto , 
     @Body(
-      new ValidationPipe({
-        forbidNonWhitelisted: true,
-        groups: ['update'],
-        whitelist: true,
-      }),
+      // new ValidationPipe({
+      //   forbidNonWhitelisted: true,
+      //   groups: ['update'],
+      //   whitelist: true,
+      // }),
     )
     body: createPropertyDto
   ) {
     return body;
+  }
+  @Get('abc')
+  findAbc() : string{
+    return "This Function fetches all the abc"
   }
 }
