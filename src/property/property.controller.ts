@@ -72,8 +72,4 @@ export class PropertyController {
   ) {
     return body;
   }
-  @Get('abc')
-  findAbc() : string{
-    return "This Function fetches all the abc"
-  }
 }
